@@ -25,7 +25,7 @@ jobs:
       - name: Initial setup + A list of all affected languages
         run: |
           sudo apt-get update && sudo apt install -y make curl git
-          changed_langs=($(git diff --name-only ${{ github.base_ref }}..${{ github.ref }} | cut -d '/' -f 1 | sort | uniq))
+          changed_langs=($(git diff --name-only ${{ github.base_ref }} | cut -d '/' -f 1 | sort | uniq))
           if [ ${#changed_langs[@]} -eq 0 ]; then echo "===> No languages affected!" && exit 1; fi
           for i in "${changed_langs[@]}"; do if [[ "$i" != .* ]] && [ -d "$i" ]; then echo "$i" >> list.txt; fi; done
           
